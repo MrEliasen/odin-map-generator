@@ -1,4 +1,4 @@
-package world_gen
+package terrain
 
 import "core:mem"
 
