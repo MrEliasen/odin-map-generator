@@ -19,6 +19,14 @@ main :: proc() {
 
 	// save terrain as image
 	save_terrain_image(tm)
+
+	// Cave Generation
+	cave_config := new_cave_config(182595)
+	cave := generate_cave(64, 64, cave_config)
+    defer cleanup(cave)
+
+	// save cave as image
+	save_cave_image(cave)
 }
 
 cleanup :: proc(data: [][]$T) {

@@ -86,3 +86,43 @@ save_terrain_image :: proc(terrain: [][]Terrain) {
         4 * i32(MAP_WIDTH),
     )
 }
+
+save_cave_image :: proc(layout: [][]bool) {
+	MAP_HEIGHT := len(layout)
+	MAP_WIDTH := len(layout[0])
+
+	pixel_data := make([]u8, MAP_WIDTH * MAP_HEIGHT * 4)
+    defer delete(pixel_data)
+
+	white := hex_string_to_rgba("#FFFFFF")
+	black := hex_string_to_rgba("#000000")
+
+	for row, y in layout {
+		for is_wall, x in row {
+			colour := is_wall ? black : white
+
+			// probably don't need to clamp here,
+			// but I am afraid to completely trust the hex->rgba math
+			r := u8(math.clamp(colour[0], 0.0, 1.0) * 255.0)
+			g := u8(math.clamp(colour[1], 0.0, 1.0) * 255.0)
+			b := u8(math.clamp(colour[2], 0.0, 1.0) * 255.0)
+			a := u8(math.clamp(colour[3], 0.0, 1.0) * 255.0)
+
+			index := (y * MAP_WIDTH + x) * 4
+
+			pixel_data[index + 0] = r
+			pixel_data[index + 1] = g
+			pixel_data[index + 2] = b
+			pixel_data[index + 3] = a
+		}
+	}
+
+	stbi.write_png(
+		"cave.png",
+		i32(MAP_WIDTH),
+		i32(MAP_HEIGHT),
+		4,
+		raw_data(pixel_data),
+		4 * i32(MAP_WIDTH),
+	)
+}
