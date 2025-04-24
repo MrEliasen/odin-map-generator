@@ -17,11 +17,11 @@ Running the code will produce a `terrain.png` file in the same directory.
 
 ### Terrain Version
 
-![Odin World Generator](terrain.png)
+![Odin Terrain Generator](example_terrain.png)
 
 ### Island Version
 
-![Odin World Generator](island.png)
+![Odin Terrain Generator](example_island.png)
 
 ## License
 

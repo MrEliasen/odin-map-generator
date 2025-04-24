@@ -57,6 +57,7 @@ save_terrain_image :: proc(terrain: [][]Terrain) {
     MAP_HEIGHT := len(terrain)
 
     pixel_data := make([]u8, MAP_WIDTH * MAP_HEIGHT * 4)
+    defer delete(pixel_data)
 
     for row, y in terrain {
         for tile, x in row {

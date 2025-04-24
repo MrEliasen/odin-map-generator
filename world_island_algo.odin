@@ -27,7 +27,7 @@ import "core:math"
     | 0        | 0.34999..         |
     |----------|-------------------|
 */
-convert_to_island :: proc(
+noise_map_to_island :: proc(
     hm: [][]f32,
     target_height: f32,
     fade_distance: int,
